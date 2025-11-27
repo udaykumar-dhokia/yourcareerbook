@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { axiosInstance } from "@/utils/axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -12,6 +13,7 @@ const page = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const router = useRouter();
 
   const register = async (
     fullName: string,
@@ -29,11 +31,10 @@ const page = () => {
       };
 
       const res = await axiosInstance.post("/auth/register", payload);
-      console.log(res.data);
       toast.success(res.data.message);
+      router.push("/dashboard");
     } catch (error: any) {
       toast.error(error.response.data.message);
-      console.log(error);
     }
   };
 
