@@ -15,7 +15,7 @@ export default function UserLayout({
   useEffect(() => {
     const exists = async () => {
       try {
-        const res = await axiosInstance.get("/users/exists");
+        const res = await axiosInstance.get("/user/exists");
         store.dispatch(setUser(res.data.user));
       } catch (error: any) {
         toast.error(error.response.data.error);
@@ -29,7 +29,7 @@ export default function UserLayout({
     <>
       <div className="">
         <UserNavbar />
-        {children}
+        <div className="flex justify-center">{children}</div>
       </div>
     </>
   );
