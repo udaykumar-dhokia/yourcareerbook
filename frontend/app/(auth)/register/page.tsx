@@ -1,10 +1,42 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { axiosInstance } from "@/utils/axios";
 import Link from "next/link";
+import { useState } from "react";
+import { toast } from "sonner";
 
 const page = () => {
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const register = async (
+    fullName: string,
+    email: string,
+    password: string
+  ) => {
+    if (!fullName || !email || !password) {
+      return;
+    }
+    try {
+      const payload = {
+        fullName: fullName,
+        email: email,
+        password: password,
+      };
+
+      const res = await axiosInstance.post("/auth/register", payload);
+      console.log(res.data);
+      toast.success(res.data.message);
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div className="min-h-screen flex justify-center items-center">
@@ -15,6 +47,8 @@ const page = () => {
           <div className="space-y-2">
             <Label>Full Name</Label>
             <Input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="w-xs rounded-none hover:rounded-xl focus-visible:rounded-xl transition-all"
               placeholder="Udaykumar Dhokia"
               type="text"
@@ -23,6 +57,8 @@ const page = () => {
           <div className="space-y-1">
             <Label>Email</Label>
             <Input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-xs rounded-none hover:rounded-xl focus-visible:rounded-xl transition-all"
               placeholder="example@mail.com"
               type="email"
@@ -31,13 +67,20 @@ const page = () => {
           <div className="space-y-1">
             <Label>Password</Label>
             <Input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-xs rounded-none hover:rounded-xl focus-visible:rounded-xl transition-all"
               placeholder="********"
               type="password"
             />
           </div>
 
-          <Button className="w-full rounded-none hover:rounded-xl">
+          <Button
+            onClick={() => {
+              register(name, email, password);
+            }}
+            className="w-full rounded-none hover:rounded-xl"
+          >
             Create
           </Button>
 
