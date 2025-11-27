@@ -10,7 +10,9 @@ const UserNavbar = () => {
         <div className="flex h-16 items-center justify-between">
           <div className="md:flex md:items-center md:gap-12">
             <a className="block text-primary" href="#">
-              <h1 className="text-2xl font-bold">yourcareerbook.com</h1>
+              <h1 className="text-2xl font-bold">
+                yourcareerbook<span className="font-normal">.com</span>
+              </h1>
             </a>
           </div>
 
