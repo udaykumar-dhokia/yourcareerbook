@@ -1,0 +1,55 @@
+# ==========================
+# Node / Backend
+# ==========================
+node_modules/
+dist/
+build/
+.tmp/
+temp/
+
+# TypeScript
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+*.log
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# ==========================
+# Drizzle ORM
+# ==========================
+drizzle/
+*.sqlite
+*.db
+
+# ==========================
+# Frontend
+# ==========================
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+
+# ==========================
+# Images / Cache / Misc
+# ==========================
+*.pid
+*.seed
+*.lock-wscript
+*.tgz
