@@ -1,6 +1,8 @@
 import { RootState } from "@/store/store";
 import { User2 } from "lucide-react";
 import { useSelector } from "react-redux";
+import logo from "../../public/logo.svg";
+import Image from "next/image";
 
 const UserNavbar = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
@@ -10,9 +12,10 @@ const UserNavbar = () => {
         <div className="flex h-16 items-center justify-between">
           <div className="md:flex md:items-center md:gap-12">
             <a className="block text-primary" href="#">
-              <h1 className="text-2xl font-bold">
+              {/* <h1 className="text-2xl font-bold">
                 yourcareerbook<span className="font-normal">.com</span>
-              </h1>
+              </h1> */}
+              <Image src={logo} alt="logo" className="w-50" />
             </a>
           </div>
 

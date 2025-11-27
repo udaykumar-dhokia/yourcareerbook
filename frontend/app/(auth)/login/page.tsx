@@ -1,4 +1,5 @@
 "use client";
+import Loader from "@/components/custom/Loader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,11 +14,13 @@ const page = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const login = async (email: string, password: string) => {
     if (!email || !password) {
       return;
     }
+    setLoading(true);
     try {
       const payload = {
         email: email,
@@ -29,8 +32,12 @@ const page = () => {
       router.push("/dashboard");
     } catch (error: any) {
       toast.error(error.response.data.message);
+    } finally {
+      setLoading(false);
     }
   };
+
+  if (loading) return <Loader />;
 
   return (
     <>
