@@ -9,6 +9,10 @@ class JWT {
       return error;
     }
   }
+
+  verify(token: string) {
+    return jwt.verify(token, process.env.JWT_SECRET) as { id: number };
+  }
 }
 
 export default new JWT();
