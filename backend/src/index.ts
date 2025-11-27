@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import { HttpStatus } from "./utils/HttpStatus";
 import authRoutes from "./features/auth/auth.routes";
 import usersRoutes from "./features/users/users.routes";
+import jobsRoutes from "./features/jobs/jobs.routes";
 
 const app = express();
 const server = http.createServer(app);
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/user", usersRoutes);
+app.use("/api/job", jobsRoutes);
 
 server.listen(process.env.PORT, async () => {
   console.log("Server is running...");
