@@ -5,6 +5,7 @@ import { usersTable } from "../../db/userSchema";
 import { eq } from "drizzle-orm";
 import hash from "../../utils/hash";
 import jwt from "../../utils/jwt";
+import { cookieOptions } from "../../utils/cookieOptions";
 
 const authController = {
   register: async (req: Request, res: Response) => {
@@ -40,7 +41,7 @@ const authController = {
 
       const token = await jwt.create(user.id);
 
-      res.cookie("token", token);
+      res.cookie("token", token, cookieOptions);
 
       res.status(HttpStatus.OK).json({ message: "Registered successfully" });
     } catch (error) {
@@ -74,7 +75,7 @@ const authController = {
 
       const token = await jwt.create(exists[0].id);
 
-      res.cookie("token", token);
+      res.cookie("token", token, cookieOptions);
 
       return res.status(HttpStatus.OK).json({ message: "Login successful" });
     } catch (error) {
