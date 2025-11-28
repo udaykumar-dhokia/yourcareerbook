@@ -69,15 +69,8 @@ const jobsController = {
         .json({ message: "Unauthorized" });
     }
 
-    const { id } = req.body;
-
-    if (!id) {
-      return res
-        .status(HttpStatus.BAD_REQUEST)
-        .json({ message: "Missing job ID" });
-    }
-
     const {
+      id,
       company,
       jobRole,
       phase,
@@ -90,6 +83,12 @@ const jobsController = {
       linkedinUrl,
       interviewDate,
     } = req.body;
+
+    if (!id) {
+      return res
+        .status(HttpStatus.BAD_REQUEST)
+        .json({ message: "Missing job ID" });
+    }
 
     try {
       const updateData = {
