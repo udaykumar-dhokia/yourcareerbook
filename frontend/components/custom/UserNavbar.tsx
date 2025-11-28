@@ -15,6 +15,9 @@ import { deleteCookie } from "cookies-next";
 import { setLogout } from "@/store/slices/user.slice";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Button } from "../ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import FeedbackDialog from "./dialogs/FeedbackDialog";
 
 const UserNavbar = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
@@ -50,6 +53,7 @@ const UserNavbar = () => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+            <FeedbackDialog />
           </div>
         </div>
       </div>

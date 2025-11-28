@@ -51,7 +51,9 @@ const page = () => {
     <>
       <div className="min-h-screen flex justify-center items-center">
         <div className="space-y-4 border p-8 border-dashed rounded-xl">
-          <Image src={logo} alt="logo" className="w-50 mb-6" />
+          <Link href={"/"}>
+            <Image src={logo} alt="logo" className="w-50 mb-6" />
+          </Link>
 
           <div className="mb-6 space-y-1">
             <h1 className="text-2xl font-bold">Create your account</h1>
