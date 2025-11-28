@@ -46,7 +46,7 @@ const authController = {
     } catch (error) {
       return res
         .status(HttpStatus.INTERNAL_SERVER_ERROR)
-        .json({ message: "Internal Server Error" });
+        .json({ message: "Internal Server Error", error });
     }
   },
 
@@ -80,7 +80,7 @@ const authController = {
     } catch (error) {
       return res
         .status(HttpStatus.INTERNAL_SERVER_ERROR)
-        .json({ message: "Internal Server Error" });
+        .json({ message: "Internal Server Error", error });
     }
   },
 };
