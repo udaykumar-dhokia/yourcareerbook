@@ -21,7 +21,6 @@ const Page = () => {
     setViewOpen(true);
   };
 
-  // 🔍 FILTER JOBS BASED ON SEARCH STRING
   const filteredJobs =
     jobs?.filter((job) => {
       const s = search.toLowerCase();
@@ -42,7 +41,6 @@ const Page = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto mt-24 px-4">
-      {/* Header */}
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold tracking-tight">
           {user?.fullName}'s{" "}
@@ -51,7 +49,6 @@ const Page = () => {
         </h1>
 
         <div className="flex gap-2">
-          {/* 🔍 SEARCH INPUT */}
           <Input
             placeholder="Search jobs... (e.g. Microsoft, Frontend)"
             className="border-gray-300"
@@ -63,10 +60,8 @@ const Page = () => {
         </div>
       </div>
 
-      {/* Job Columns */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 mt-12">
         {phases.map(({ title, color }) => {
-          // Jobs belonging to this phase AFTER SEARCH FILTERING
           const phaseJobs = filteredJobs.filter((job) => job.phase === title);
 
           return (

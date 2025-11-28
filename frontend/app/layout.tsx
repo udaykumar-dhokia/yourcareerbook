@@ -3,7 +3,6 @@ import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/store/providers";
 
-// Load Bricolage Grotesque
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-bricolage",
@@ -11,7 +10,8 @@ const bricolage = Bricolage_Grotesque({
 
 export const metadata: Metadata = {
   title: "Track Everything that Builds Your Career",
-  description: "Track Everything that Builds Your Career",
+  description:
+    " Manage all your job applications in one clean dashboard. Stay organized, stay consistent, and land your next career opportunity with ease.",
   icons: {
     icon: "/logo.svg",
   },
