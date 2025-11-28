@@ -5,10 +5,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { axiosInstance } from "@/utils/axios";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import logo from "../../../public/logo.svg";
 
 const page = () => {
   const [email, setEmail] = useState<string>("");
@@ -43,6 +45,7 @@ const page = () => {
     <>
       <div className="min-h-screen flex justify-center items-center">
         <div className="space-y-4 border p-8 border-dashed rounded-xl">
+          <Image src={logo} alt="logo" className="w-50 mb-6" />
           <div className="mb-6 space-y-1">
             <h1 className="text-2xl font-bold">Welcome back!</h1>
           </div>

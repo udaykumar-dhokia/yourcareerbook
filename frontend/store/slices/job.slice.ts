@@ -5,7 +5,7 @@ export type Job = {
   user: string;
   company: string;
   jobRole: string;
-  phase: "Applied" | "Test/OA" | "Interview" | "Offer" | "Rejected";
+  phase: string;
   jobDescriptionLink?: string | null;
   salary?: number | null;
   companyWebsite?: string | null;
@@ -34,9 +34,21 @@ const jobSlice = createSlice({
     addJob: (state, action: PayloadAction<Job>) => {
       state.jobs?.push(action.payload);
     },
+    deleteJob: (state, action: PayloadAction<Job>) => {
+      state.jobs = (state.jobs || []).filter(
+        (job) => job.id != action.payload.id
+      );
+    },
+    updateJob: (state, action: PayloadAction<Job>) => {
+      if (!state.jobs) return;
+
+      state.jobs = state.jobs.map((job) =>
+        job.id === action.payload.id ? action.payload : job
+      );
+    },
   },
 });
 
-export const { setJobs, addJob } = jobSlice.actions;
+export const { setJobs, addJob, deleteJob, updateJob } = jobSlice.actions;
 
 export default jobSlice.reducer;
