@@ -12,6 +12,9 @@ const bricolage = Bricolage_Grotesque({
 export const metadata: Metadata = {
   title: "Track Everything that Builds Your Career",
   description: "Track Everything that Builds Your Career",
+  icons: {
+    icon: "/logo.svg",
+  },
 };
 
 export default function RootLayout({

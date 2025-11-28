@@ -1,6 +1,6 @@
 "use client";
 import { RootState, store } from "@/store/store";
-import { User2 } from "lucide-react";
+import { Bug, Lightbulb, NotebookPen, User2 } from "lucide-react";
 import { useSelector } from "react-redux";
 import logo from "../../public/logo.svg";
 import Image from "next/image";
@@ -15,6 +15,8 @@ import { deleteCookie } from "cookies-next";
 import { setLogout } from "@/store/slices/user.slice";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Button } from "../ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 const UserNavbar = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
@@ -50,6 +52,14 @@ const UserNavbar = () => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+            <Tooltip>
+              <TooltipTrigger>
+                <NotebookPen className="cursor-pointer" />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Bug/Feedback</p>
+              </TooltipContent>
+            </Tooltip>
           </div>
         </div>
       </div>
