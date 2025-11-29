@@ -9,6 +9,7 @@ import authRoutes from "./features/auth/auth.routes";
 import usersRoutes from "./features/users/users.routes";
 import jobsRoutes from "./features/jobs/jobs.routes";
 import feedbackRoutes from "./features/feedback/feedback.routes";
+import followupRoutes from "./features/followup/followup.routes";
 
 const app = express();
 const server = http.createServer(app);
@@ -34,6 +35,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/user", usersRoutes);
 app.use("/api/job", jobsRoutes);
 app.use("/api/feedback", feedbackRoutes);
+app.use("/api/followup", followupRoutes);
 
 server.listen(process.env.PORT, async () => {
   console.log("Server is running...");
