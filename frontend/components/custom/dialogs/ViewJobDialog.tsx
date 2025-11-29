@@ -105,7 +105,6 @@ const ViewJobDialog = ({ job, open, onClose }: ViewJobDialogProps) => {
               </div>
             )}
 
-            {/* Extra Details Section */}
             <div className="border-t pt-4 mt-2 grid gap-3">
               {job.companyWebsite && (
                 <div>

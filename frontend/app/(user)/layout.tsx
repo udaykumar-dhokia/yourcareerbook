@@ -1,5 +1,6 @@
 "use client";
 
+import Footer from "@/components/custom/Footer";
 import Loader from "@/components/custom/Loader";
 import UserNavbar from "@/components/custom/UserNavbar";
 import { setJobs } from "@/store/slices/job.slice";
@@ -50,6 +51,7 @@ export default function UserLayout({
     <>
       <UserNavbar />
       <div className="flex justify-center">{children}</div>
+      <Footer />
     </>
   );
 }

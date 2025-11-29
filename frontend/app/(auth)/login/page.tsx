@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 import logo from "../../../public/logo.svg";
+import { Loader2 } from "lucide-react";
 
 const page = () => {
   const [email, setEmail] = useState<string>("");
@@ -38,8 +39,6 @@ const page = () => {
       setLoading(false);
     }
   };
-
-  if (loading) return <Loader />;
 
   return (
     <>
@@ -78,7 +77,7 @@ const page = () => {
             }}
             className="w-full rounded-none hover:rounded-xl"
           >
-            Create
+            {loading ? <Loader2 className="animate-spin" /> : "Continue"}
           </Button>
 
           <Separator />
