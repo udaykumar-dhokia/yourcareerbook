@@ -40,18 +40,21 @@ const Page = () => {
   ];
 
   return (
-    <div className="w-full max-w-7xl mx-auto mt-24 px-4">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold tracking-tight">
+    <div className="w-full max-w-7xl mx-auto my-12 md:my-24 px-4">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-center md:text-left">
           {user?.fullName}'s{" "}
           <span className="font-normal text-gray-600">career book</span>{" "}
-          <span className="text-gray-500 text-xl">({filteredJobs.length})</span>
+          <span className="text-gray-500 text-lg md:text-xl">
+            ({filteredJobs.length})
+          </span>
         </h1>
 
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
           <Input
             placeholder="Search jobs... (e.g. Microsoft, Frontend)"
-            className="border-gray-300"
+            className="border-gray-300 w-full"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -60,6 +63,7 @@ const Page = () => {
         </div>
       </div>
 
+      {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 mt-12">
         {phases.map(({ title, color }) => {
           const phaseJobs = filteredJobs.filter((job) => job.phase === title);
@@ -67,9 +71,9 @@ const Page = () => {
           return (
             <div key={title}>
               <div
-                className={`bg-gray-50 border ${color} rounded-none hover:rounded-xl shadow-sm p-4 text-center mb-4`}
+                className={`bg-gray-50 border ${color} rounded-none hover:rounded-xl shadow-sm p-3 sm:p-4 text-center mb-4`}
               >
-                <h2 className="text-xl font-semibold">
+                <h2 className="text-lg sm:text-xl font-semibold">
                   {title} ({phaseJobs.length})
                 </h2>
               </div>
@@ -80,7 +84,7 @@ const Page = () => {
                     <div
                       key={index}
                       onClick={() => openView(job)}
-                      className={`group relative p-4 border 
+                      className={`group relative p-3 sm:p-4 border 
                         ${
                           title === "Offer"
                             ? "border-green-300"
@@ -89,10 +93,13 @@ const Page = () => {
                         rounded-none hover:rounded-xl transition-all bg-white shadow-sm cursor-pointer`}
                     >
                       <div>
-                        <h3 className="font-semibold text-gray-900">
+                        <h3 className="font-semibold text-gray-900 text-base sm:text-lg">
                           {job.company}
                         </h3>
-                        <p className="text-sm text-gray-600">{job.jobRole}</p>
+
+                        <p className="text-xs sm:text-sm text-gray-600">
+                          {job.jobRole}
+                        </p>
 
                         {job.interviewDate && title === "Interview" && (
                           <p className="text-xs text-gray-500 mt-1">

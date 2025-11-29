@@ -6,6 +6,13 @@ import Link from "next/link";
 const Hero = () => {
   return (
     <section className="min-h-[90vh] flex flex-col justify-center items-center px-4 py-20 bg-linear-to-b from-white to-gray-50">
+      <div className="shine-effect p-2 border mb-4 rounded-none transition-all hover:border-gray-400 hover:border-dashed hover:rounded-xl bg-white/50 backdrop-blur-sm">
+        <p className="text-sm">
+          Don't search for pricing section! It's{" "}
+          <span className="font-bold italic text-gray-600">FREE</span>.
+        </p>
+      </div>
+
       <div className="max-w-3xl text-center space-y-6 mb-16">
         <h1 className="text-5xl md:text-6xl font-normal leading-tight">
           Track Every <span className="italic font-bold">Job</span> That Builds

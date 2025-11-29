@@ -1,5 +1,5 @@
 "use client";
-import Loader from "@/components/custom/Loader";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 import logo from "../../../public/logo.svg";
+import { Loader2 } from "lucide-react";
 
 const page = () => {
   const [name, setName] = useState<string>("");
@@ -44,8 +45,6 @@ const page = () => {
       setLoading(false);
     }
   };
-
-  if (loading) return <Loader />;
 
   return (
     <>
@@ -95,7 +94,7 @@ const page = () => {
             }}
             className="w-full rounded-none hover:rounded-xl"
           >
-            Create
+            {loading ? <Loader2 className="animate-spin" /> : "Create"}
           </Button>
 
           <Separator />

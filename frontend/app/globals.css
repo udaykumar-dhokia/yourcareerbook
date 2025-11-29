@@ -120,3 +120,29 @@
     @apply bg-background text-foreground;
   }
 }
+
+.shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-effect::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.7) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  transition: all 0.8s ease;
+}
+
+.shine-effect:hover::before {
+  left: 150%;
+}
