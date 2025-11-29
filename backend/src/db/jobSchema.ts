@@ -3,9 +3,9 @@ import {
   varchar,
   uuid,
   text,
-  integer,
   pgEnum,
   date,
+  decimal,
 } from "drizzle-orm/pg-core";
 import { usersTable } from "./userSchema";
 
@@ -26,7 +26,7 @@ export const jobTable = pgTable("jobs", {
   jobRole: varchar({ length: 255 }).notNull(),
   phase: phase().notNull(),
   jobDescriptionLink: varchar({ length: 255 }),
-  salary: integer(),
+  salary: decimal(),
   companyWebsite: varchar({ length: 255 }),
   remark: text(),
   contactName: varchar({ length: 255 }),
@@ -34,3 +34,5 @@ export const jobTable = pgTable("jobs", {
   linkedinUrl: varchar({ length: 255 }),
   interviewDate: date(),
 });
+
+export type TJob = typeof jobTable.$inferSelect;
