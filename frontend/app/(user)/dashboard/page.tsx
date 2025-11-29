@@ -1,11 +1,15 @@
 "use client";
 import AddJobDialog from "@/components/custom/dialogs/AddJobDialog";
 import ViewJobDialog from "@/components/custom/dialogs/ViewJobDialog";
+import AddJobDrawer from "@/components/custom/drawers/AddJobDrawer";
+import ViewJobDrawer from "@/components/custom/drawers/ViewJobDrawer";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { RootState } from "@/store/store";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Stars } from "lucide-react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { toast } from "sonner";
 
 const Page = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
@@ -59,7 +63,22 @@ const Page = () => {
             onChange={(e) => setSearch(e.target.value)}
           />
 
-          <AddJobDialog />
+          <AddJobDrawer />
+
+          <div className="relative inline-block group">
+            <div
+              className="absolute inset-0 rounded-md bg-linear-to-r from-purple-500 via-blue-500 to-pink-500 
+      opacity-40 blur-md group-hover:opacity-60 transition-all duration-500 animate-gradient"
+            />
+
+            <Button
+              variant="outline"
+              className="relative z-10 bg-background border-transparent hover:bg-background font-medium"
+              onClick={() => toast.info("Coming soon! Stay tuned.")}
+            >
+              <Stars className="mr-2" /> Follow-up
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -127,7 +146,7 @@ const Page = () => {
         })}
       </div>
 
-      <ViewJobDialog
+      <ViewJobDrawer
         job={selectedJob}
         open={viewOpen}
         onClose={() => setViewOpen(false)}
