@@ -17,6 +17,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import FeedbackDialog from "./dialogs/FeedbackDialog";
+import AddJobDrawer from "./drawers/AddJobDrawer";
 
 const UserNavbar = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
@@ -62,6 +63,8 @@ const UserNavbar = () => {
             </DropdownMenu>
 
             <FeedbackDialog />
+
+            <AddJobDrawer />
           </div>
         </div>
       </div>
