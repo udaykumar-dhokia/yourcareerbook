@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
-import db from "../../config/db.config";
-import { usersTable } from "../../db/userSchema";
-import { HttpStatus } from "../../utils/HttpStatus";
+import db from "../../config/db.config.js";
+import { usersTable } from "../../db/userSchema.js";
+import { HttpStatus } from "../../utils/httpStatus.js";
 
 const usersController = {
   exists: async (req, res) => {

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { HttpStatus } from "../utils/HttpStatus";
-import jwt from "../utils/jwt";
+import { HttpStatus } from "../utils/httpStatus.js";
+import jwt from "../utils/jwt.js";
 
 const authMiddleware = async (
   req: Request,
