@@ -1,7 +1,7 @@
 import express from "express";
-import folloUpController from "./followup.controller";
-import authMiddleware from "../../middlewares/auth.middleware";
-import limiter from "../../config/ratelimiter.config";
+import folloUpController from "./followup.controller.js";
+import authMiddleware from "../../middlewares/auth.middleware.js";
+import limiter from "../../config/ratelimiter.config.js";
 
 const router = express.Router();
 

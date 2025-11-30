@@ -1,7 +1,7 @@
 import { and, eq } from "drizzle-orm";
-import db from "../../config/db.config";
-import { jobTable } from "../../db/jobSchema";
-import { HttpStatus } from "../../utils/HttpStatus";
+import db from "../../config/db.config.js";
+import { jobTable } from "../../db/jobSchema.js";
+import { HttpStatus } from "../../utils/httpStatus.js";
 
 const jobsController = {
   create: async (req, res) => {
