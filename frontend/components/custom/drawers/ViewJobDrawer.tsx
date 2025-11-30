@@ -12,7 +12,7 @@ import {
 
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Trash } from "lucide-react";
+import { Stars, Trash } from "lucide-react";
 import { toast } from "sonner";
 import { axiosInstance } from "@/utils/axios";
 import { deleteJob, Job } from "@/store/slices/job.slice";
@@ -60,6 +60,21 @@ const ViewJobDrawer = ({ job, open, onClose }: ViewJobSheetProps) => {
           <SheetHeader className="p-0">
             <SheetTitle className="text-xl font-bold">{job.company}</SheetTitle>
             <SheetDescription>Detailed job information.</SheetDescription>
+
+            <div className="relative w-full mt-2 inline-block group">
+              <div
+                className="absolute inset-0 rounded-none bg-linear-to-r from-purple-500 via-blue-500 to-pink-500 
+                  opacity-40 blur-md group-hover:opacity-60 transition-all duration-500 animate-gradient"
+              />
+
+              <Button
+                variant="outline"
+                className="relative w-full z-10 bg-background border-transparent hover:bg-background font-medium"
+                onClick={() => toast.info("Coming soon! Stay tuned.")}
+              >
+                <Stars className="mr-2" /> Follow-up
+              </Button>
+            </div>
           </SheetHeader>
 
           <div className="grid gap-4 mt-4 max-h-[70vh] overflow-y-auto pr-1">
