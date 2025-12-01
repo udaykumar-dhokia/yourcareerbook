@@ -1,8 +1,22 @@
-import { pgTable, varchar, uuid } from "drizzle-orm/pg-core";
+import { pgTable, varchar, uuid, boolean, jsonb } from "drizzle-orm/pg-core";
 
 export const usersTable = pgTable("users", {
   id: uuid().primaryKey().defaultRandom(),
   fullName: varchar({ length: 255 }).notNull(),
   email: varchar({ length: 255 }).notNull().unique(),
   password: varchar({ length: 255 }).notNull(),
+  mobile: varchar({ length: 255 }),
+  city: varchar({ length: 255 }),
+  state: varchar({ length: 255 }),
+  country: varchar({ length: 255 }),
+  summary: varchar({ length: 255 }),
+  gridOrTable: boolean().default(true),
+  socialLinks: jsonb("socialLinks").$type<SocialLinks>().default({}),
+  skills: varchar({ length: 255 }).array().default([]),
 });
+
+export type SocialLinks = {
+  linkedin?: string;
+  github?: string;
+  porfolio?: string;
+};
