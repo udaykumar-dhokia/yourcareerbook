@@ -35,6 +35,13 @@ const Page = () => {
   const [layout, setLayout] = useState<"table" | "grid">("grid");
 
   const [phaseFilter, setPhaseFilter] = useState<string>("all");
+  const phaseOrder: Record<string, number> = {
+    Applied: 1,
+    "Test/OA": 2,
+    Interview: 3,
+    Offer: 4,
+    Rejected: 5,
+  };
 
   const openView = (job: any) => {
     setSelectedJob(job);
@@ -61,6 +68,10 @@ const Page = () => {
 
       return matchesSearch && matchesPhase;
     }) || [];
+
+  const sortedJobs = [...filteredJobs].sort(
+    (a, b) => (phaseOrder[a.phase] || 99) - (phaseOrder[b.phase] || 99)
+  );
 
   return (
     <div className="w-full max-w-7xl mx-auto my-12 md:my-24 px-4">
@@ -141,10 +152,12 @@ const Page = () => {
             </TableHeader>
 
             <TableBody>
-              {filteredJobs.map((job, i) => (
+              {sortedJobs.map((job, i) => (
                 <TableRow
                   key={i}
-                  className="cursor-pointer hover:bg-gray-50"
+                  className={`cursor-pointer ${
+                    job.phase == "Offer" ? "bg-green-50" : ""
+                  } hover:bg-gray-50`}
                   onClick={() => openView(job)}
                 >
                   <TableCell className="font-medium">{job.company}</TableCell>
