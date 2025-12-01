@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "sonner";
+import Link from "next/link";
 
 export default function UserLayout({
   children,
@@ -21,6 +22,12 @@ export default function UserLayout({
   const { user } = useSelector((state: RootState) => state.userReducer);
   const { jobs } = useSelector((state: RootState) => state.jobReducer);
   const router = useRouter();
+
+  const isProfileComplete = (user: any) => {
+    if (!user) return false;
+    const requiredFields = ["fullName", "city", "country", "summary", "mobile"];
+    return requiredFields.every((field) => !!user[field]);
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -42,6 +49,8 @@ export default function UserLayout({
 
     if (!user || !jobs) {
       exists();
+    } else {
+      setLoading(false);
     }
   }, []);
 
@@ -50,7 +59,21 @@ export default function UserLayout({
   return (
     <>
       <UserNavbar />
-      <div className="flex justify-center">{children}</div>
+
+      {user && !isProfileComplete(user) && (
+        <div className="bg-yellow-100 border-l-4 border-yellow-400 text-yellow-700 py-2 px-4 w-full max-w-5xl mx-auto mt-4 rounded-md">
+          <p>
+            Your profile is incomplete.
+            <Link href="/profile" className="underline font-semibold">
+              Complete your profile
+            </Link>{" "}
+            to get the most out of our platform.
+          </p>
+        </div>
+      )}
+
+      <div className="flex justify-center w-full">{children}</div>
+
       <Footer />
     </>
   );

@@ -1,6 +1,6 @@
-import db from "../../config/db.config";
-import { feedbackTable } from "../../db/feedbackSchema";
-import { HttpStatus } from "../../utils/HttpStatus";
+import db from "../../config/db.config.js";
+import { feedbackTable } from "../../db/feedbackSchema.js";
+import { HttpStatus } from "../../utils/httpStatus.js";
 
 const feedbackController = {
   create: async (req, res) => {

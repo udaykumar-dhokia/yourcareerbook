@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import { HttpStatus } from "../../utils/HttpStatus";
-import db from "../../config/db.config";
-import { usersTable } from "../../db/userSchema";
+import { HttpStatus } from "../../utils/httpStatus.js";
+import db from "../../config/db.config.js";
+import { usersTable } from "../../db/userSchema.js";
 import { eq } from "drizzle-orm";
-import hash from "../../utils/hash";
-import jwt from "../../utils/jwt";
-import { cookieOptions } from "../../utils/cookieOptions";
+import hash from "../../utils/hash.js";
+import jwt from "../../utils/jwt.js";
+import { cookieOptions } from "../../utils/cookieOptions.js";
 
 const authController = {
   register: async (req: Request, res: Response) => {

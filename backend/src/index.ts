@@ -4,12 +4,12 @@ import http from "http";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
-import { HttpStatus } from "./utils/HttpStatus";
-import authRoutes from "./features/auth/auth.routes";
-import usersRoutes from "./features/users/users.routes";
-import jobsRoutes from "./features/jobs/jobs.routes";
-import feedbackRoutes from "./features/feedback/feedback.routes";
-import followupRoutes from "./features/followup/followup.routes";
+import { HttpStatus } from "./utils/httpStatus.js";
+import authRoutes from "./features/auth/auth.routes.js";
+import usersRoutes from "./features/users/users.routes.js";
+import jobsRoutes from "./features/jobs/jobs.routes.js";
+import feedbackRoutes from "./features/feedback/feedback.routes.js";
+import followupRoutes from "./features/followup/followup.routes.js";
 
 const app = express();
 const server = http.createServer(app);

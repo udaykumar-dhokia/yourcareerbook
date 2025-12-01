@@ -1,9 +1,23 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
+export type SocialLinks = {
+  linkedin?: string;
+  github?: string;
+  porfolio?: string;
+};
+
 export type User = {
-  id?: String;
-  email: String;
-  fullName: String;
+  id: string;
+  fullName: string;
+  email: string;
+  mobile?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  summary?: string;
+  gridOrTable?: boolean;
+  socialLinks?: SocialLinks;
+  skills?: string[];
 };
 
 interface IUser {

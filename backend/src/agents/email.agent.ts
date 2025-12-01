@@ -1,6 +1,6 @@
 import { google } from "@ai-sdk/google";
 import { generateText } from "ai";
-import { TJob } from "../db/jobSchema";
+import { TJob } from "../db/jobSchema.js";
 
 const emailAgent = async (job: TJob) => {
   if (!job) return;

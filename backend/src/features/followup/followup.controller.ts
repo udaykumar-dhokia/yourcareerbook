@@ -1,8 +1,8 @@
 import { eq } from "drizzle-orm";
-import db from "../../config/db.config";
-import { jobTable } from "../../db/jobSchema";
-import { HttpStatus } from "../../utils/HttpStatus";
-import emailAgent from "../../agents/email.agent";
+import db from "../../config/db.config.js";
+import { jobTable } from "../../db/jobSchema.js";
+import { HttpStatus } from "../../utils/httpStatus.js";
+import emailAgent from "../../agents/email.agent.js";
 
 const folloUpController = {
   create: async (req, res) => {
