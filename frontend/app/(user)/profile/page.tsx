@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProfileHeader from "./components/ProfileHeader";
 import GeneralTab from "./components/GeneralTab";
-import ProfessionalTab from "./components/ProfessionalTab";
 
 const page = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
@@ -16,7 +15,9 @@ const page = () => {
       <Tabs defaultValue="general" className="w-full">
         <TabsList className="grid w-full grid-cols-2 mb-8">
           <TabsTrigger value="general">General</TabsTrigger>
-          <TabsTrigger value="professional">Professional</TabsTrigger>
+          <TabsTrigger value="professional" disabled>
+            Professional
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="general">
@@ -24,7 +25,9 @@ const page = () => {
         </TabsContent>
 
         <TabsContent value="professional">
-          <ProfessionalTab />
+          <div className="text-center py-16 text-muted-foreground">
+            Professional tab is coming soon 🚀
+          </div>
         </TabsContent>
       </Tabs>
     </div>
