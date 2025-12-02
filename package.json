@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@ai-sdk/google": "^2.0.44",
+    "@langchain/core": "^1.1.1",
     "@neondatabase/serverless": "^1.0.2",
     "ai": "^5.0.104",
     "bcryptjs": "^3.0.3",
@@ -25,7 +26,8 @@
     "drizzle-orm": "^0.44.7",
     "express": "^5.1.0",
     "express-rate-limit": "^8.2.1",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "langchain": "^1.1.2"
   },
   "devDependencies": {
     "@types/express": "^5.0.5",

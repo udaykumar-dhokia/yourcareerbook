@@ -13,11 +13,7 @@ const usersController = {
     }
     try {
       const user = await db
-        .select({
-          id: usersTable.id,
-          email: usersTable.email,
-          fullName: usersTable.fullName,
-        })
+        .select()
         .from(usersTable)
         .where(eq(usersTable.id, userId));
 
