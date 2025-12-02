@@ -7,7 +7,7 @@ export type SocialLinks = {
 };
 
 export type User = {
-  id: string;
+  id?: string;
   fullName: string;
   email: string;
   mobile?: string;
@@ -42,9 +42,12 @@ export const userSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
     },
+    updateUser: (state, action: PayloadAction<User>) => {
+      state.user = action.payload;
+    },
   },
 });
 
-export const { setUser, setLogout } = userSlice.actions;
+export const { setUser, setLogout, updateUser } = userSlice.actions;
 
 export default userSlice.reducer;

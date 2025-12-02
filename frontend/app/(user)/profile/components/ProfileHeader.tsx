@@ -15,7 +15,7 @@ const ProfileHeader = ({ user }: ProfileHeaderProps) => {
   const portfolio = user?.socialLinks?.porfolio ?? "#";
 
   const avatarUrl = user?.id
-    ? `https://api.dicebear.com/7.x/thumbs/svg?seed=${user.id}`
+    ? `https://api.dicebear.com/7.x/thumbs/svg?seed=${user.email}`
     : "https://api.dicebear.com/7.x/adventurer/svg?seed=guest";
 
   return (
