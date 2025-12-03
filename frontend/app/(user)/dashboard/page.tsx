@@ -9,7 +9,7 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
-import { RootState } from "@/store/store";
+import { RootState, store } from "@/store/store";
 import { ArrowUpRight, List, LayoutGrid } from "lucide-react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -23,6 +23,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { gridOrTable } from "@/store/slices/user.slice";
 
 const Page = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
@@ -32,7 +33,6 @@ const Page = () => {
   const [viewOpen, setViewOpen] = useState(false);
 
   const [search, setSearch] = useState("");
-  const [layout, setLayout] = useState<"table" | "grid">("grid");
 
   const [phaseFilter, setPhaseFilter] = useState<string>("all");
   const phaseOrder: Record<string, number> = {
@@ -108,15 +108,15 @@ const Page = () => {
 
           <div className="flex gap-2">
             <Button
-              variant={layout === "grid" ? "default" : "outline"}
-              onClick={() => setLayout("grid")}
+              variant={user?.gridOrTable ? "default" : "outline"}
+              onClick={() => store.dispatch(gridOrTable(true))}
             >
               <LayoutGrid className="w-4 h-4 mr-2" />
               Grid
             </Button>
             <Button
-              variant={layout === "table" ? "default" : "outline"}
-              onClick={() => setLayout("table")}
+              variant={!user?.gridOrTable ? "default" : "outline"}
+              onClick={() => store.dispatch(gridOrTable(false))}
             >
               <List className="w-4 h-4 mr-2" />
               Table
@@ -137,7 +137,7 @@ const Page = () => {
         </div>
       </div>
 
-      {layout === "table" ? (
+      {!user?.gridOrTable ? (
         /* ---------------------- TABLE VIEW ---------------------- */
         <div className="mt-8 min-h-[80vh]">
           <Table>
