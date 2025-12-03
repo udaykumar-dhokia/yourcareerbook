@@ -14,7 +14,7 @@ const ProfileHeader = ({ user }: ProfileHeaderProps) => {
       : "Location not set";
   const portfolio = user?.socialLinks?.porfolio ?? "#";
 
-  const avatarUrl = user?.id
+  const avatarUrl = user?.email
     ? `https://api.dicebear.com/7.x/thumbs/svg?seed=${user.email}`
     : "https://api.dicebear.com/7.x/adventurer/svg?seed=guest";
 

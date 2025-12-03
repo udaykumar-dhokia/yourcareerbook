@@ -15,7 +15,7 @@ export type User = {
   state?: string;
   country?: string;
   summary?: string;
-  gridOrTable?: boolean;
+  gridOrTable: boolean;
   socialLinks?: SocialLinks;
   skills?: string[];
 };
@@ -45,9 +45,13 @@ export const userSlice = createSlice({
     updateUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
     },
+    gridOrTable: (state, action: PayloadAction<boolean>) => {
+      state.user.gridOrTable = action.payload;
+    },
   },
 });
 
-export const { setUser, setLogout, updateUser } = userSlice.actions;
+export const { setUser, setLogout, updateUser, gridOrTable } =
+  userSlice.actions;
 
 export default userSlice.reducer;
