@@ -17,14 +17,23 @@ const server = http.createServer(app);
 app.use(express.json());
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://yourcareerbook.vercel.app",
-      "https://yourcareerbook.vercel.app/",
-    ],
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+
+      const allowed = [
+        /\.localhost(:\d+)?$/,
+        /^https?:\/\/([a-z0-9-]+\.)*yourcareerbook\.vercel\.app$/,
+      ];
+
+      const ok = allowed.some((regex) => regex.test(origin));
+      if (ok) return callback(null, true);
+
+      callback(new Error("Not allowed by CORS: " + origin));
+    },
     credentials: true,
   })
 );
+
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
