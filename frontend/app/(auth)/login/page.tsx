@@ -6,16 +6,13 @@ import { Separator } from "@/components/ui/separator";
 import { axiosInstance } from "@/utils/axios";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 import logo from "../../../public/logo.svg";
 import { Loader2 } from "lucide-react";
 
 const page = () => {
-  const params = useParams();
-  const search = useSearchParams();
-  console.log(search.get("card"));
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const router = useRouter();
