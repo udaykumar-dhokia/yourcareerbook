@@ -1,5 +1,4 @@
 "use client";
-import Loader from "@/components/custom/Loader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,13 +6,16 @@ import { Separator } from "@/components/ui/separator";
 import { axiosInstance } from "@/utils/axios";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 import logo from "../../../public/logo.svg";
 import { Loader2 } from "lucide-react";
 
 const page = () => {
+  const params = useParams();
+  const search = useSearchParams();
+  console.log(search.get("card"));
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const router = useRouter();
@@ -51,13 +53,13 @@ const page = () => {
             <h1 className="text-2xl font-bold">Welcome back!</h1>
           </div>
           <div className="space-y-1">
-            <Label>Email</Label>
+            <Label>Email or username</Label>
             <Input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-xs rounded-none hover:rounded-xl focus-visible:rounded-xl transition-all"
-              placeholder="example@mail.com"
-              type="email"
+              placeholder="example@mail.com or udthedeveloper"
+              type="text"
             />
           </div>
           <div className="space-y-1">
