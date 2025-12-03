@@ -46,7 +46,9 @@ export const userSlice = createSlice({
       state.user = action.payload;
     },
     gridOrTable: (state, action: PayloadAction<boolean>) => {
-      state.user.gridOrTable = action.payload;
+      if (state.user) {
+        state.user.gridOrTable = action.payload;
+      }
     },
   },
 });
