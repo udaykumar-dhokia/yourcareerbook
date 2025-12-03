@@ -2,15 +2,15 @@ import { Request, Response } from "express";
 import { HttpStatus } from "../../utils/httpStatus.js";
 import db from "../../config/db.config.js";
 import { usersTable } from "../../db/userSchema.js";
-import { eq } from "drizzle-orm";
+import { eq, or } from "drizzle-orm";
 import hash from "../../utils/hash.js";
 import jwt from "../../utils/jwt.js";
 import { cookieOptions } from "../../utils/cookieOptions.js";
 
 const authController = {
   register: async (req: Request, res: Response) => {
-    const { fullName, email, password } = req.body;
-    if (!fullName || !email || !password) {
+    const { fullName, email, password, username } = req.body;
+    if (!fullName || !email || !password || !username) {
       return res
         .status(HttpStatus.BAD_REQUEST)
         .json({ message: "Missing required fields" });
@@ -20,7 +20,9 @@ const authController = {
       const exists = await db
         .select()
         .from(usersTable)
-        .where(eq(usersTable.email, email));
+        .where(
+          or(eq(usersTable.email, email), eq(usersTable.username, username))
+        );
 
       if (exists.length != 0) {
         return res
@@ -36,6 +38,7 @@ const authController = {
           email: email,
           fullName: fullName,
           password: hashedPassword,
+          username: username,
         })
         .returning({ id: usersTable.id });
 
@@ -62,7 +65,7 @@ const authController = {
       const exists = await db
         .select()
         .from(usersTable)
-        .where(eq(usersTable.email, email));
+        .where(or(eq(usersTable.email, email), eq(usersTable.username, email)));
 
       if (
         exists.length == 0 ||

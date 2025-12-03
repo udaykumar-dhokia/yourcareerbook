@@ -2,6 +2,7 @@ import { eq } from "drizzle-orm";
 import db from "../../config/db.config.js";
 import { usersTable } from "../../db/userSchema.js";
 import { HttpStatus } from "../../utils/httpStatus.js";
+import { Request, Response } from "express";
 
 const usersController = {
   exists: async (req, res) => {
@@ -23,11 +24,13 @@ const usersController = {
           .json({ message: "No such user found" });
       }
 
-      return res.status(HttpStatus.OK).json({ user: user[0] });
+      const { password, ...safeUser } = user[0];
+
+      return res.status(HttpStatus.OK).json({ user: safeUser });
     } catch (error) {
       return res
         .status(HttpStatus.INTERNAL_SERVER_ERROR)
-        .json({ message: "Internal Server Error" });
+        .json({ message: "Internal Server Error", error });
     }
   },
 
@@ -51,6 +54,7 @@ const usersController = {
         gridOrTable,
         socialLinks,
         skills,
+        username,
       } = req.body;
 
       const updateData: any = {};
@@ -64,6 +68,7 @@ const usersController = {
       if (gridOrTable !== undefined) updateData.gridOrTable = gridOrTable;
       if (socialLinks !== undefined) updateData.socialLinks = socialLinks;
       if (skills !== undefined) updateData.skills = skills;
+      if (userId !== undefined) updateData.username = username;
 
       if (Object.keys(updateData).length === 0) {
         return res
@@ -87,6 +92,7 @@ const usersController = {
           gridOrTable: usersTable.gridOrTable,
           socialLinks: usersTable.socialLinks,
           skills: usersTable.skills,
+          username: usersTable.username,
         });
 
       if (updatedUser.length === 0) {
@@ -101,7 +107,60 @@ const usersController = {
     } catch (error) {
       return res
         .status(HttpStatus.INTERNAL_SERVER_ERROR)
-        .json({ message: "Internal Server Error" });
+        .json({ message: "Internal Server Error", error });
+    }
+  },
+
+  checkUsername: async (req: Request, res: Response) => {
+    const username = req.params.username;
+    if (!username) {
+      return res
+        .status(HttpStatus.BAD_REQUEST)
+        .json({ message: "Missing required fields" });
+    }
+    try {
+      const user = await db
+        .select({ username: usersTable.username })
+        .from(usersTable)
+        .where(eq(usersTable.username, username));
+
+      if (user.length != 0) {
+        return res.status(200).json({ success: false });
+      }
+
+      return res.status(200).json({ success: true });
+    } catch (error) {
+      return res
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .json({ message: "Internal Server Error", error });
+    }
+  },
+
+  getByUsername: async (req: Request, res: Response) => {
+    const username = req.params.username;
+    if (!username) {
+      return res
+        .status(HttpStatus.BAD_REQUEST)
+        .json({ message: "Missing required fields" });
+    }
+    try {
+      const user = await db
+        .select()
+        .from(usersTable)
+        .where(eq(usersTable.username, username));
+
+      if (user.length == 0) {
+        return res
+          .status(HttpStatus.NOT_FOUND)
+          .json({ message: "No such user found" });
+      }
+
+      const { password, ...safeUser } = user[0];
+      return res.status(HttpStatus.OK).json({ user: safeUser });
+    } catch (error) {
+      return res
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .json({ message: "Internal Server Error", error });
     }
   },
 };
