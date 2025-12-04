@@ -12,6 +12,10 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "sonner";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import AddJobDialog from "@/components/custom/dialogs/AddJobDialog";
+import AddJobDrawer from "@/components/custom/drawers/AddJobDrawer";
+import { Input } from "@/components/ui/input";
 
 export default function UserLayout({
   children,
@@ -19,7 +23,9 @@ export default function UserLayout({
   children: React.ReactNode;
 }) {
   const [loading, setLoading] = useState<boolean>(true);
-  const { user } = useSelector((state: RootState) => state.userReducer);
+  const { user, agentMode } = useSelector(
+    (state: RootState) => state.userReducer
+  );
   const { jobs } = useSelector((state: RootState) => state.jobReducer);
   const router = useRouter();
 
@@ -60,20 +66,36 @@ export default function UserLayout({
     <>
       <UserNavbar />
 
-      {user && !isProfileComplete(user) && (
-        <div className="bg-yellow-100 border-l-4 border-yellow-400 text-yellow-700 py-2 px-4 w-full max-w-5xl mx-auto mt-4 rounded-md">
-          <p>
-            Your profile is incomplete.
-            <Link href="/profile" className="underline font-semibold">
-              Complete your profile
-            </Link>{" "}
-            to get the most out of our platform.
-          </p>
+      <div
+        className={`relative min-h-screen ${
+          agentMode ? "grid grid-cols-2" : ""
+        }`}
+      >
+        <div className="">
+          {user && !isProfileComplete(user) && (
+            <div className="bg-yellow-100 border-l-4 border-yellow-400 text-yellow-700 py-2 px-4 w-full max-w-5xl mx-auto mt-4 rounded-md">
+              <p>
+                Your profile is incomplete.{" "}
+                <Link href="/profile" className="underline font-semibold">
+                  Complete your profile
+                </Link>{" "}
+                to get the most out of our platform.
+              </p>
+            </div>
+          )}
+
+          <div className="flex justify-center w-full">{children}</div>
         </div>
-      )}
 
-      <div className="flex justify-center w-full">{children}</div>
-
+        {agentMode && (
+          <div className="p-4 border my-2 ml-2 rounded-xl bg-gray-50 min-h-screen">
+            <div className="min-h-[60vh]"></div>
+            <div className="p-4">
+              <Input />
+            </div>
+          </div>
+        )}
+      </div>
       <Footer />
     </>
   );

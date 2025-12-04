@@ -23,11 +23,13 @@ export type User = {
 interface IUser {
   user: User | null;
   isAuthenticated: boolean;
+  agentMode: boolean;
 }
 
 const initialState: IUser = {
   user: null,
   isAuthenticated: false,
+  agentMode: false,
 };
 
 export const userSlice = createSlice({
@@ -50,10 +52,13 @@ export const userSlice = createSlice({
         state.user.gridOrTable = action.payload;
       }
     },
+    setAgenMode: (state) => {
+      state.agentMode = !state.agentMode;
+    },
   },
 });
 
-export const { setUser, setLogout, updateUser, gridOrTable } =
+export const { setUser, setLogout, updateUser, gridOrTable, setAgenMode } =
   userSlice.actions;
 
 export default userSlice.reducer;
