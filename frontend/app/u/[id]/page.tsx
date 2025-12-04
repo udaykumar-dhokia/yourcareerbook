@@ -9,6 +9,8 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import ProfileView from "./components/ProfileView";
+import logo from "../../../public/logo.svg";
+import Image from "next/image";
 
 export default function page() {
   const { id } = useParams();
@@ -59,10 +61,21 @@ export default function page() {
 
   return (
     <>
-      <div className="min-h-[80vh] w-full max-w-5xl mx-auto my-12 md:my-24 px-4">
+      <div className="min-h-[80vh] w-full max-w-5xl mx-auto my-6 md:my-16 px-4">
         <ProfileHeader user={user!} />
 
         <ProfileView user={user!} />
+
+        <div className="mt-6 flex justify-center items-center">
+          <div className="space-y-1">
+            <p className="text-sm">Powered by</p>
+            <Image
+              src={logo}
+              alt="logo"
+              className="w-28 sm:w-36 md:w-44 h-auto"
+            />
+          </div>
+        </div>
       </div>
     </>
   );

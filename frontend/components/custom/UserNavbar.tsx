@@ -13,12 +13,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { deleteCookie } from "cookies-next";
-import { setLogout } from "@/store/slices/user.slice";
+import { setAgenMode, setLogout } from "@/store/slices/user.slice";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import FeedbackDialog from "./dialogs/FeedbackDialog";
 import AddJobDrawer from "./drawers/AddJobDrawer";
 import { useState } from "react";
+import { Button } from "../ui/button";
+import { toast } from "sonner";
 
 const UserNavbar = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
@@ -87,7 +89,20 @@ const UserNavbar = () => {
             </DropdownMenu>
 
             <FeedbackDialog />
-            <AddJobDrawer />
+
+            <div className="relative inline-block group">
+              <div className="absolute inset-0 rounded-md bg-linear-to-r from-purple-500 via-blue-500 to-pink-500 opacity-50 blur-md group-hover:opacity-70 transition-all duration-500 animate-gradient" />
+
+              <Button
+                onClick={() => {
+                  // store.dispatch(setAgenMode());
+                  toast.info("Coming soon! Stay tuned.");
+                }}
+                className="relative w-full z-10 border-transparent font-medium"
+              >
+                Try Job Agent
+              </Button>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
