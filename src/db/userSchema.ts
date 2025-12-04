@@ -5,6 +5,8 @@ import {
   boolean,
   jsonb,
   text,
+  date,
+  integer,
 } from "drizzle-orm/pg-core";
 
 export const usersTable = pgTable("users", {
@@ -21,6 +23,8 @@ export const usersTable = pgTable("users", {
   gridOrTable: boolean().default(true),
   socialLinks: jsonb("socialLinks").$type<SocialLinks>().default({}),
   skills: varchar({ length: 255 }).array().default([]),
+  appliedDate: date().defaultNow(),
+  jobSearchLimit: integer().default(4),
 });
 
 export type SocialLinks = {

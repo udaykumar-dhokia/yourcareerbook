@@ -7,7 +7,7 @@ import {
   date,
   decimal,
 } from "drizzle-orm/pg-core";
-import { usersTable } from "./userSchema.js";
+import { usersTable } from "./userSchema";
 
 export const phase = pgEnum("phase", [
   "Applied",
