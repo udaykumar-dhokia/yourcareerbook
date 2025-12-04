@@ -1,9 +1,9 @@
 import "dotenv/config";
 import { createAgent } from "langchain";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
-import { careerGuidancePrompt } from "./prompts/prompts";
-import { getJobs } from "./tools/webSearch";
-import jobFinderOutput from "./outputs/jobFinder";
+import { careerGuidancePrompt } from "./prompts/prompts.js";
+import { getJobs } from "./tools/webSearch.js";
+import jobFinderOutput from "./outputs/jobFinder.js";
 
 const model = new ChatGoogleGenerativeAI({
   model: "gemini-2.0-flash",

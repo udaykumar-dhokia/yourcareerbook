@@ -1,9 +1,9 @@
 import { eq } from "drizzle-orm";
-import { jobAgent } from "../../agents/agent";
-import db from "../../config/db.config";
-import { usersTable } from "../../db/userSchema";
-import { HttpStatus } from "../../utils/httpStatus";
-import { jobSearchTable } from "../../db/jobSearchSchema";
+import { jobAgent } from "../../agents/agent.js";
+import db from "../../config/db.config.js";
+import { usersTable } from "../../db/userSchema.js";
+import { HttpStatus } from "../../utils/httpStatus.js";
+import { jobSearchTable } from "../../db/jobSearchSchema.js";
 
 const agentsController = {
   findJobs: async (req, res) => {
