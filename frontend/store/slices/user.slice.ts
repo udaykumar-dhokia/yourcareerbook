@@ -18,7 +18,7 @@ export type User = {
   gridOrTable: boolean;
   socialLinks?: SocialLinks;
   skills?: string[];
-  jobSearchLimit: number;
+  jobSearchLimit?: number;
 };
 
 interface IUser {
