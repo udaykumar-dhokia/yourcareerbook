@@ -28,18 +28,27 @@ const agentsController = {
 
   findJobs: async (req, res) => {
     const userId = req.userId;
+    const { query } = req.body;
+
     if (!userId) {
       return res
         .status(HttpStatus.UNAUTHORIZED)
         .json({ message: "Unauthorized" });
     }
+
+    if (!query) {
+      return res
+        .status(HttpStatus.BAD_REQUEST)
+        .json({ message: "Query is required" });
+    }
+
     try {
       const user = await db
         .select({ limit: usersTable.jobSearchLimit })
         .from(usersTable)
         .where(eq(usersTable.id, userId));
 
-      if (!user) {
+      if (!user.length) {
         return res
           .status(HttpStatus.NOT_FOUND)
           .json({ message: "User not found" });
@@ -47,8 +56,24 @@ const agentsController = {
 
       if (user[0].limit <= 0) {
         return res
-          .status(HttpStatus.BAD_REQUEST)
+          .status(HttpStatus.FORBIDDEN)
           .json({ message: "You have used your free tier" });
+      }
+
+      const finalOutput = await jobAgent.invoke({
+        messages: [{ role: "user", content: query }],
+      });
+
+      if (
+        !finalOutput ||
+        !finalOutput.structuredResponse ||
+        !finalOutput.structuredResponse.jobs ||
+        finalOutput.structuredResponse.jobs.length === 0
+      ) {
+        return res.status(HttpStatus.NOT_FOUND).json({
+          message:
+            "No job results found or agent failed to respond meaningfully",
+        });
       }
 
       await db
@@ -56,22 +81,17 @@ const agentsController = {
         .set({ jobSearchLimit: user[0].limit - 1 })
         .where(eq(usersTable.id, userId));
 
-      const result = await jobAgent.invoke({
-        messages: [
-          {
-            role: "user",
-            content: "Find me the jobs for Full Stack Developer in Ahmedabad.",
-          },
-        ],
-      });
+      const [job] = await db
+        .insert(jobSearchTable)
+        .values({
+          user: userId,
+          jobs: finalOutput.structuredResponse.jobs,
+        })
+        .returning();
 
-      await db.insert(jobSearchTable).values({
-        user: userId,
-        jobs: result.structuredResponse.jobs,
-      });
-
-      return res.status(HttpStatus.OK).json(result.structuredResponse.jobs);
+      return res.status(HttpStatus.OK).json({ job });
     } catch (error) {
+      console.log(error);
       return res
         .status(HttpStatus.INTERNAL_SERVER_ERROR)
         .json({ message: "Internal Server Error", error });
