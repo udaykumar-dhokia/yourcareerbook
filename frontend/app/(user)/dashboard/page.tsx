@@ -79,7 +79,7 @@ const Page = () => {
       <AnimatePresence>
         <motion.div
           layout
-          transition={{ type: "spring", stiffness: 90, damping: 15 }}
+          transition={{ type: "spring", stiffness: 110, damping: 15 }}
           className="flex flex-col md:flex-row md:justify-between md:items-center gap-4"
         >
           <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-center md:text-left">
