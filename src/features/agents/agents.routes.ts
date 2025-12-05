@@ -5,6 +5,7 @@ import limiter from "../../config/ratelimiter.config.js";
 
 const router = express.Router();
 
-router.get("/job-search/", authMiddleware, limiter, agentsController.findJobs);
+router.post("/job-search/", authMiddleware, limiter, agentsController.findJobs);
+router.get("/job-search/", authMiddleware, agentsController.getJobs);
 
 export default router;
