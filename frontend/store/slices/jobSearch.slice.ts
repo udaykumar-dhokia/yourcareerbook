@@ -13,7 +13,7 @@ export type JobSearchQuery = {
   id?: string;
   user: string;
   jobs: JobSearch[];
-  createdAt: string;
+  createdAt?: string;
 };
 
 interface JobSearchResults {
@@ -31,9 +31,13 @@ export const jobSearchSlice = createSlice({
     setJobSearch: (state, action: PayloadAction<JobSearchQuery[]>) => {
       state.jobs = action.payload;
     },
+
+    addJobSearch: (state, action: PayloadAction<JobSearchQuery>) => {
+      state.jobs.unshift(action.payload);
+    },
   },
 });
 
-export const { setJobSearch } = jobSearchSlice.actions;
+export const { setJobSearch, addJobSearch } = jobSearchSlice.actions;
 
 export default jobSearchSlice.reducer;

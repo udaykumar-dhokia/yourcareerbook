@@ -1,16 +1,44 @@
 import { useSelector } from "react-redux";
 import { Input } from "../ui/input";
 import { RootState, store } from "@/store/store";
-import { Flame, Send, X } from "lucide-react";
+import { Flame, Loader2, Send, X } from "lucide-react";
 import { setAgenMode } from "@/store/slices/user.slice";
 import { Button } from "../ui/button";
 import { useState } from "react";
+import { addJobSearch } from "@/store/slices/jobSearch.slice";
+import { toast } from "sonner";
+import { axiosInstance } from "@/utils/axios";
 
 const JobAgent = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
   const { jobs } = useSelector((state: RootState) => state.jobSearchReducer);
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  console.log(jobs);
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const startSearch = async () => {
+    if (!searchQuery) return;
+
+    setLoading(true);
+
+    try {
+      const res = await axiosInstance.post("/agent/job-search/", {
+        query: searchQuery,
+      });
+      store.dispatch(addJobSearch(res.data.job));
+      toast.success("Hunt successful");
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const sortedJobs = [...jobs].sort(
+    (a, b) =>
+      new Date(b.createdAt!).getTime() - new Date(a.createdAt!).getTime()
+  );
 
   return (
     <>
@@ -43,6 +71,7 @@ const JobAgent = () => {
 
           <Button
             disabled={!searchQuery}
+            onClick={startSearch}
             className="flex items-center gap-2 px-5 shadow-md"
           >
             Search
@@ -50,15 +79,28 @@ const JobAgent = () => {
           </Button>
         </div>
 
+        {loading && (
+          <div className="flex justify-center items-center gap-2">
+            <Loader2 className="animate-spin" />
+            <p>Hold on while the agent is hunting.</p>
+          </div>
+        )}
+
         {/* Job List */}
-        <div className="overflow-y-auto flex-1 pr-1">
-          {jobs.length === 0 && (
+        <div
+          className="flex-1 pr-1 max-h-screen overflow-y-auto"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
+        >
+          {sortedJobs.length === 0 && (
             <div className="flex justify-center items-center h-[60vh] text-gray-500 text-lg">
               Start hunting now for a better future 🚀
             </div>
           )}
 
-          {jobs.map((job, index) => (
+          {sortedJobs.map((job, index) => (
             <div
               key={index}
               className="rounded-none hover:rounded-xl p-2 mb-6 transition-all"

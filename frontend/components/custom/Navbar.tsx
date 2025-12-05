@@ -11,39 +11,50 @@ const Navbar = () => {
   const router = useRouter();
 
   return (
-    <header className="bg-white border-b">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center">
-            <Link href="/" className="block text-primary">
-              <Image
-                src={logo}
-                alt="logo"
-                className="w-32 sm:w-40 md:w-48 h-auto"
-              />
-            </Link>
-          </div>
+    <div className="">
+      <header className="bg-white border-b">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
+            <div className="flex items-center">
+              <Link href="/" className="block text-primary">
+                <Image
+                  src={logo}
+                  alt="logo"
+                  className="w-32 sm:w-40 md:w-48 h-auto"
+                />
+              </Link>
+            </div>
 
-          <div className="flex items-center gap-2 sm:gap-3">
-            <Button
-              variant="outline"
-              className="px-4 py-2 text-sm sm:text-base"
-              onClick={() => router.push("/login")}
-            >
-              Login
-            </Button>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Button
+                variant="outline"
+                className="px-4 py-2 text-sm sm:text-base"
+                onClick={() => router.push("/login")}
+              >
+                Login
+              </Button>
 
-            <Button
-              className="flex items-center gap-1 px-4 py-2 text-sm sm:text-base"
-              onClick={() => router.push("/register")}
-            >
-              Get Started
-              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-            </Button>
+              <Button
+                className="flex items-center gap-1 px-4 py-2 text-sm sm:text-base"
+                onClick={() => router.push("/register")}
+              >
+                Get Started
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              </Button>
+            </div>
           </div>
         </div>
+        <div className=""></div>
+      </header>
+      <div className="border-b border-gray-200 bg-gray-100 px-4 py-2 text-gray-900">
+        <p className="text-center font-medium">
+          🎉 Job Agent is live.{" "}
+          <Link href="/register" className="inline-block underline">
+            Register Now & Get Free Credits
+          </Link>
+        </p>
       </div>
-    </header>
+    </div>
   );
 };
 
