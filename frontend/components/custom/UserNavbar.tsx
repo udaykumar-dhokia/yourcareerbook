@@ -95,8 +95,7 @@ const UserNavbar = () => {
 
               <Button
                 onClick={() => {
-                  // store.dispatch(setAgenMode());
-                  toast.info("Coming soon! Stay tuned.");
+                  store.dispatch(setAgenMode());
                 }}
                 className="relative w-full z-10 border-transparent font-medium"
               >

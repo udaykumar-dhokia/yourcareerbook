@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./slices/user.slice";
 import jobReducer from "./slices/job.slice";
+import jobSearchReducer from "./slices/jobSearch.slice";
 
 export const store = configureStore({
   reducer: {
     userReducer: userReducer,
     jobReducer: jobReducer,
+    jobSearchReducer: jobSearchReducer,
   },
 });
 

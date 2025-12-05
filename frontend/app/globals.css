@@ -163,3 +163,29 @@
   background-size: 200% 200%;
   animation: gradient 4s ease infinite;
 }
+
+@keyframes rainbow-border {
+  0% {
+    border-color: #ff0000;
+  } /* Red */
+  25% {
+    border-color: #057005;
+  } /* Green */
+  50% {
+    border-color: #0000ff7c;
+  } /* Blue */
+  75% {
+    border-color: #ff00ff;
+  } /* Pink */
+  100% {
+    border-color: #ff000078;
+  } /* Back to red */
+}
+
+.border-animate {
+  border-left: 1px;
+  border-bottom: 1px;
+  border-top: 1px;
+  border-style: solid;
+  animation: rainbow-border 10s linear infinite;
+}
