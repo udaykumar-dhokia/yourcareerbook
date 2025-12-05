@@ -76,63 +76,61 @@ const Page = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto my-12 md:my-24 px-4">
-      <AnimatePresence>
-        <motion.div
-          layout
-          transition={{ type: "spring", stiffness: 110, damping: 15 }}
-          className="flex flex-col md:flex-row md:justify-between md:items-center gap-4"
-        >
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-center md:text-left">
-            {user?.fullName}'s{" "}
-            <span className="font-normal text-gray-600">career book</span>{" "}
-            <span className="text-gray-500 text-lg md:text-xl">
-              ({filteredJobs.length})
-            </span>
-          </h1>
+      <motion.div
+        layout
+        className="flex flex-col md:flex-row md:justify-between md:items-center gap-4"
+      >
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-center md:text-left">
+          {user?.fullName}'s{" "}
+          <span className="font-normal text-gray-600">career book</span>{" "}
+          <span className="text-gray-500 text-lg md:text-xl">
+            ({filteredJobs.length})
+          </span>
+        </h1>
 
-          <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
-            <Input
-              placeholder="Search jobs... (e.g. Microsoft, Frontend)"
-              className="border-gray-300 w-full"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
+        <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
+          <Input
+            placeholder="Search jobs... (e.g. Microsoft, Frontend)"
+            className="border-gray-300 w-full"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
 
-            <Select value={phaseFilter} onValueChange={setPhaseFilter}>
-              <SelectTrigger className="w-full rounded-none">
-                <SelectValue placeholder="Filter phase" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Phases</SelectItem>
-                {phases.map((p) => (
-                  <SelectItem key={p.title} value={p.title}>
-                    {p.title}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+          <Select value={phaseFilter} onValueChange={setPhaseFilter}>
+            <SelectTrigger className="w-full rounded-none">
+              <SelectValue placeholder="Filter phase" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Phases</SelectItem>
+              {phases.map((p) => (
+                <SelectItem key={p.title} value={p.title}>
+                  {p.title}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
 
-            <div className="flex gap-2">
-              <div className="flex">
-                <Button
-                  variant={user?.gridOrTable ? "default" : "outline"}
-                  onClick={() => store.dispatch(gridOrTable(true))}
-                >
-                  <LayoutGrid className="w-4 h-4 mr-2" />
-                  Grid
-                </Button>
-                <Button
-                  variant={!user?.gridOrTable ? "default" : "outline"}
-                  onClick={() => store.dispatch(gridOrTable(false))}
-                >
-                  <List className="w-4 h-4 mr-2" />
-                  Table
-                </Button>
-              </div>
-              <AddJobDrawer />
+          <div className="flex gap-2">
+            <div className="flex">
+              <Button
+                variant={user?.gridOrTable ? "default" : "outline"}
+                onClick={() => store.dispatch(gridOrTable(true))}
+              >
+                <LayoutGrid className="w-4 h-4 mr-2" />
+                Grid
+              </Button>
+              <Button
+                variant={!user?.gridOrTable ? "default" : "outline"}
+                onClick={() => store.dispatch(gridOrTable(false))}
+              >
+                <List className="w-4 h-4 mr-2" />
+                Table
+              </Button>
             </div>
+            <AddJobDrawer />
+          </div>
 
-            {/* <div className="relative inline-block group">
+          {/* <div className="relative inline-block group">
             <div className="absolute inset-0 rounded-md bg-linear-to-r from-purple-500 via-blue-500 to-pink-500 opacity-40 blur-md group-hover:opacity-60 transition-all duration-500 animate-gradient" />
 
             <Button
@@ -143,17 +141,12 @@ const Page = () => {
               <Stars className="mr-2" /> Follow-up
             </Button>
           </div> */}
-          </div>
-        </motion.div>
-      </AnimatePresence>
+        </div>
+      </motion.div>
 
       {!user?.gridOrTable ? (
         /* ---------------------- TABLE VIEW ---------------------- */
-        <motion.div
-          layout
-          transition={{ type: "spring", stiffness: 90, damping: 15 }}
-          className="mt-8 min-h-[80vh]"
-        >
+        <motion.div layout className="mt-8 min-h-[80vh]">
           <Table>
             <TableHeader className="font-bold text-md bg-gray-100">
               <TableRow>
@@ -197,7 +190,6 @@ const Page = () => {
         <motion.div
           layout
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 mt-12 min-h-[80vh]"
-          transition={{ type: "spring", stiffness: 100, damping: 18 }}
         >
           {phases.map(({ title, color }) => {
             const phaseJobs = filteredJobs.filter((job) => job.phase === title);
