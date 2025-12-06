@@ -44,9 +44,11 @@ const agentsController = {
 
     try {
       const user = await db
-        .select({ limit: usersTable.jobSearchLimit })
+        .select({ jobSearchLimit: usersTable.jobSearchLimit })
         .from(usersTable)
         .where(eq(usersTable.id, userId));
+
+      console.log(user);
 
       if (!user.length) {
         return res
@@ -54,7 +56,7 @@ const agentsController = {
           .json({ message: "User not found" });
       }
 
-      if (user[0].limit <= 0) {
+      if (user[0].jobSearchLimit <= 0) {
         return res
           .status(HttpStatus.FORBIDDEN)
           .json({ message: "You have used your free tier" });
@@ -76,9 +78,11 @@ const agentsController = {
         });
       }
 
+      console.log(finalOutput.structuredResponse);
+
       await db
         .update(usersTable)
-        .set({ jobSearchLimit: user[0].limit - 1 })
+        .set({ jobSearchLimit: user[0].jobSearchLimit - 1 })
         .where(eq(usersTable.id, userId));
 
       const [job] = await db
@@ -88,6 +92,8 @@ const agentsController = {
           jobs: finalOutput.structuredResponse.jobs,
         })
         .returning();
+
+      console.log(job);
 
       return res.status(HttpStatus.OK).json({ job });
     } catch (error) {

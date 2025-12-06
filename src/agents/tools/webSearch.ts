@@ -16,6 +16,11 @@ export const getJobs = tool(
       "ziprecruiter.com",
       "naukri.com",
       "foundit.in",
+      "freshershunt.in",
+      "instagram.com",
+      "freshercareers.in",
+      "facebook.com",
+      "fresherscamp.com",
     ];
     const exclusionQuery = excludedSites
       .map((site) => `-site:${site}`)
